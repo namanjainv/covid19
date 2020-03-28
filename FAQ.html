@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+
+<!-- 
+    Ref: https://www.w3schools.com/bootstrap4/tryit.asp?filename=trybs_template1
+    
+ -->
+<html lang="en">
+<head>
+    <title> Covid-19 Tracker | India </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap 4 -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    
+    <!-- C3 -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/c3/0.7.15/c3.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.15.0/d3.min.js" charset="utf-8"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.7.15/c3.min.js"></script>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="./css/style.css">
+
+    <!-- Custom JS -->
+    <script src="./javascript/script.js"> </script> 
+</head>
+<body onload="">
+    <nav class="navbar fixed-top navbar-expand-sm bg-dark navbar-dark">
+        <a class="navbar-brand" href="#"> Covid-19 Tracker </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+            <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="./index.html">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="./FAQ.html">FAQ</a>
+            </li>    
+            </ul>
+        </div>  
+    </nav>
+
+    <div class="mainContent">
+        <div class="container">
+            <h4> FAQ </h4>
+
+            <div class="row myRow">
+                <div class="col-md-12">
+                    <h5> Coronavirus Disease 2019 Basics </h5>
+                    <div class="row card">
+                        <button type="button" class="btn btn-primary faqButton" data-toggle="collapse" data-target="#w11"> 
+                            What is the source of the virus?
+                        </button>
+                        <div id="w11" class="collapse faqCollapse">
+                            <p>Coronavirus disease (COVID-19) is an infectious disease caused by a new virus.
+                    
+                                The disease causes respiratory illness (like the flu) with symptoms such as a cough, fever, and in more severe cases, difficulty breathing. You can protect yourself by washing your hands frequently, avoiding touching your face, and avoiding close contact (1 meter or 3 feet) with people who are unwell.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row myRow">
+                <div class="col-md-12">
+                    <h5> How COVID-19 Spreads </h5>
+                    <div class="row card">
+                        <button type="button" class="btn btn-primary faqButton" data-toggle="collapse" data-target="#w21"> 
+                            What is the source of the virus?
+                        </button>
+                        <div id="w21" class="collapse faqCollapse">
+                            <p>Coronaviruses are a large family of viruses. Some cause illness in people, and others, such as canine and feline coronaviruses, only infect animals. Rarely, animal coronaviruses that infect animals have emerged to infect people and can spread between people. This is suspected to have occurred for the virus that causes COVID-19. Middle East Respiratory Syndrome (MERS) and Severe Acute Respiratory Syndrome (SARS) are two other examples of coronaviruses that originated from animals and then spread to people. More information about the source and spread of COVID-19 is available on the <a href="https://www.cdc.gov/coronavirus/2019-ncov/cases-updates/summary.html">Situation Summary: Source and Spread of the Virus</a>.</p>
+                        </div>
+                    </div>
+
+                    <div class="row card">
+                        <button type="button" class="btn btn-primary faqButton" data-toggle="collapse" data-target="#w22"> 
+                            How does the virus spread?
+                        </button>
+                        <div id="w22" class="collapse faqCollapse">
+                            <p>This virus was first detected in Wuhan City, Hubei Province, China. The first infections were linked to a live animal market, but the virus is now spreading from person-to-person. It’s important to note that person-to-person spread can happen on a continuum. Some viruses are highly contagious (like measles), while other viruses are less so.</p>
+                            <p>The virus that causes COVID-19 seems to be spreading easily and sustainably in the community (“community spread”) in <a href="https://www.cdc.gov/coronavirus/2019-ncov/prevent-getting-sick/how-covid-spreads.html">some affected geographic areas</a>. Community spread means people have been infected with the virus in an area, including some who are not sure how or where they became infected.</p>
+                            <p>Learn what is known about the <a href="https://www.cdc.gov/coronavirus/2019-ncov/prevent-getting-sick/how-covid-spreads.html">spread of newly emerged coronaviruses</a>.</p>
+                        </div>
+                    </div>
+
+                    <div class="row card">
+                        <button type="button" class="btn btn-primary faqButton" data-toggle="collapse" data-target="#w23"> 
+                            Can someone who has had COVID-19 spread the illness to others?
+                        </button>
+                        <div id="w23" class="collapse faqCollapse">
+                            <p>The virus that causes COVID-19 is <a href="https://www.cdc.gov/coronavirus/2019-ncov/prevent-getting-sick/how-covid-spreads.html">spreading from person-to-person</a>. Someone who is actively sick with COVID-19 can spread the illness to others. That is why CDC recommends that these patients be isolated either in the hospital or at home (depending on how sick they are) until they are better and no longer pose a risk of infecting others.</p>
+                        </div>
+                    </div>
+
+                    <div class="row card">
+                        <button type="button" class="btn btn-primary faqButton" data-toggle="collapse" data-target="#w24"> 
+                            Can someone who has been quarantined for COVID-19 spread the illness to others?
+                        </button>
+                        <div id="w24" class="collapse faqCollapse">
+                            <p> Quarantine means separating a person or group of people who have been exposed to a contagious disease but have not developed illness (symptoms) from others who have not been exposed, in order to prevent the possible spread of that disease. Quarantine is usually established for the incubation period of the communicable disease, which is the span of time during which people have developed illness after exposure. For COVID-19, the period of quarantine is 14 days from the last date of exposure, because 14 days is the longest incubation period seen for similar coronaviruses. Someone who has been released from COVID-19 quarantine is not considered a risk for spreading the virus to others because they have not developed illness during the incubation period. </p>    
+                        </div>
+                    </div>
+
+                    <div class="row card">
+                        <button type="button" class="btn btn-primary faqButton" data-toggle="collapse" data-target="#w25"> 
+                            Can the virus that causes COVID-19 be spread through food, including refrigerated or frozen food?
+                        </button>
+                        <div id="w25" class="collapse faqCollapse">
+                            <p>Coronaviruses are generally thought to be spread from person-to-person through respiratory droplets. Currently there is no evidence to support transmission of COVID-19 associated with food. Before preparing or eating food it is important to always wash your hands with soap and water for 20 seconds for general food safety. Throughout the day wash your hands after blowing your nose, coughing or sneezing, or going to the bathroom.</p>
+                            <p>It may be possible that a person can get COVID-19 by touching a surface or object that has the virus on it and then touching their own mouth, nose, or possibly their eyes, but this is not thought to be the main way the virus spreads.</p>
+                            <p>In general, because of poor survivability of these coronaviruses on surfaces, there is likely very low risk of spread from food products or packaging that are shipped over a period of days or weeks at ambient, refrigerated, or frozen temperatures.</p>
+                            <p>Learn what is known about the <a href="https://www.cdc.gov/coronavirus/2019-ncov/prevent-getting-sick/how-covid-spreads.html">spread of COVID-19</a>.</p>
+                        </div>
+                    </div>
+
+                    <div class="row card">
+                        <button type="button" class="btn btn-primary faqButton" data-toggle="collapse" data-target="#w26"> 
+                            Will warm weather stop the outbreak of COVID-19?
+                        </button>
+                        <div id="w26" class="collapse faqCollapse">
+                            <p> It is not yet known whether weather and temperature impact the spread of COVID-19. Some other viruses, like the common cold and flu, spread more during cold weather months but that does not mean it is impossible to become sick with these viruses during other months.  At this time, it is not known whether the spread of COVID-19 will decrease when weather becomes warmer.  There is much more to learn about the transmissibility, severity, and other features associated with COVID-19 and investigations are ongoing. </p>
+                        </div>
+                    </div>
+
+                    <div class="row card">
+                        <button type="button" class="btn btn-primary faqButton" data-toggle="collapse" data-target="#w27"> 
+                            What is community spread?
+                        </button>
+                        <div id="w27" class="collapse faqCollapse">
+                            <p> Community spread means people have been infected with the virus in an area, including some who are not sure how or where they became infected. </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row myRow">
+                <div class="col-md-12">
+                    <h5> How to Protect Yourself </h5>
+                    <div class="row card">
+                        <button type="button" class="btn btn-primary faqButton" data-toggle="collapse" data-target="#h31"> 
+                            How can I help protect myself?
+                        </button>
+                        <div id="h31" class="collapse faqCollapse">
+                            <p>Visit the <a href="https://www.cdc.gov/coronavirus/2019-ncov/prevent-getting-sick/prevention.html">COVID-19 Prevention and Treatment</a>&nbsp;page to learn about how to protect yourself from respiratory illnesses, like COVID-19.</p>
+                        </div>
+                    </div>
+                    <div class="row card">
+                        <button type="button" class="btn btn-primary faqButton" data-toggle="collapse" data-target="#h32"> 
+                            What should I do if I had close contact with someone who has COVID-19?
+                        </button>
+                        <div id="h32" class="collapse faqCollapse">
+                            <p>There is information for <a href="https://www.cdc.gov/coronavirus/2019-ncov/hcp/guidance-prevent-spread.html">people who have had close contact</a>&nbsp;with a person confirmed to have, or being evaluated for, COVID-19 available online.</p>
+                        </div>
+                    </div>
+                    <div class="row card">
+                        <button type="button" class="btn btn-primary faqButton" data-toggle="collapse" data-target="#h33"> 
+                            Is it okay for me to donate blood?
+                        </button>
+                        <div id="h33" class="collapse faqCollapse">
+                            <p>In healthcare settings all across the United States, donated blood is a lifesaving, essential part of caring for patients. The need for donated blood is constant, and blood centers are open and in urgent need of donations. CDC encourages people who are well to continue to donate blood if they are able, even if they are practicing social distancing because of COVID-19. CDC is supporting blood centers by providing recommendations that will keep donors and staff safe. Examples of these recommendations include spacing donor chairs 6 feet apart, thoroughly adhering to environmental cleaning practices, and encouraging donors to make donation appointments ahead of time./p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row myRow">
+                <div class="col-md-12">
+                    <h5> Preparing Your Home for COVID-19 </h5>
+                    <div class="row card">
+                        <button type="button" class="btn btn-primary faqButton" data-toggle="collapse" data-target="#w41"> 
+                            How can my family and I prepare for COVID-19?
+                        </button>
+                        <div id="w41" class="collapse faqCollapse">
+                            <div class="card-body"><p>Create a household plan of action to help protect your health and the health of those you care about in the event of an outbreak of COVID-19 in your community:</p>
+                                <ul>
+                                    <li>Talk with the people who need to be included in your plan, and discuss <a href="https://www.cdc.gov/coronavirus/2019-ncov/cases-updates/summary.html">what to do if a COVID-19 outbreak occurs in your community</a>.</li>
+                                    <li>Plan ways to care for those who might be at greater risk for serious complications, particularly <a href="https://www.cdc.gov/coronavirus/2019-ncov/need-extra-precautions/people-at-higher-risk.html">older adults and those with severe chronic medical</a>&nbsp;conditions like heart, lung or kidney disease.
+                                <ul>
+                                    <li>Make sure they have access to several weeks of medications and supplies in case you need to stay home for prolonged periods of time.</li>
+                                </ul>
+                                <ul>
+                                    <li>Get to know your neighbors and find out if your neighborhood has a website or social media page to stay connected.</li>
+                                    <li>Create a list of local organizations that you and your household can contact in the event you need access to information, healthcare services, support, and resources.</li>
+                                    <li>Create an emergency contact list of family, friends, neighbors, carpool drivers, health care providers, teachers, employers, the local public health department, and other community resources.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row card">
+                        <button type="button" class="btn btn-primary faqButton" data-toggle="collapse" data-target="#w42"> 
+                            What steps can my family take to reduce our risk of getting COVID-19?
+                        </button>
+                        <div id="w42" class="collapse faqCollapse">
+                            <p>Practice everyday preventive actions to help reduce your risk of getting sick and remind everyone in your home to do the same. These actions are especially important for older adults and people who have severe chronic medical conditions:</p>
+                            <ul>
+                                <li>Avoid close contact with people who are sick.</li>
+                                <li>Stay home when you are sick, except to get medical care.</li>
+                                <li>Cover your coughs and sneezes with a tissue and throw the tissue in the trash.</li>
+                                <li>Wash your hands often with soap and water for at least 20 seconds, especially after blowing your nose, coughing, or sneezing; going to the bathroom; and before eating or preparing food.</li>
+                                <li>If soap and water are not readily available, use an alcohol-based hand sanitizer with at least 60% alcohol. Always wash hands with soap and water if hands are visibly dirty.</li>
+                                <li>Clean and disinfect frequently touched surfaces and objects<br>
+                                (e.g., tables, countertops, light switches, doorknobs, and cabinet handles).</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="row card">
+                        <button type="button" class="btn btn-primary faqButton" data-toggle="collapse" data-target="#w43"> 
+                            What should I do if someone in my house gets sick with COVID-19?
+                        </button>
+                        <div id="w43" class="collapse faqCollapse">
+                            <div class="card-body"><p>Most people who get COVID-19 will be able to recover at home. <a href="https://www.cdc.gov/coronavirus/2019-ncov/hcp/guidance-prevent-spread.html">CDC has directions</a> for people who are recovering at home and their caregivers, including:</p>
+                                <ul>
+                                    <li>Stay home when you are sick, except to get medical care.</li>
+                                    <li>Use a separate room and bathroom for sick household members (if possible).</li>
+                                    <li>Clean hands regularly by handwashing with soap and water or using an alcohol-based hand sanitizer with at least 60% alcohol.</li>
+                                    <li>Provide your sick household member with clean disposable facemasks to wear at home, if available, to help prevent spreading COVID-19 to others.</li>
+                                    <li><a href="https://www.cdc.gov/coronavirus/2019-ncov/prevent-getting-sick/cleaning-disinfection.html">Clean the sick room and bathroom</a>, as needed, to avoid unnecessary contact with the sick person.</li>
+                                    <li>Avoid sharing personal items like utensils, food, and drinks.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row card">
+                        <button type="button" class="btn btn-primary faqButton" data-toggle="collapse" data-target="#w44"> 
+                            When to Seek Medical Attention?
+                        </button>
+                        <div id="w44" class="collapse faqCollapse">
+                            <div class="card-body"><p>Most people who get COVID-19 will be able to recover at home. <a href="https://www.cdc.gov/coronavirus/2019-ncov/hcp/guidance-prevent-spread.html">CDC has directions</a> for people who are recovering at home and their caregivers, including:</p>
+                                <p>If you develop <strong>emergency warning signs</strong> for COVID-19 get <strong>medical attention immediately</strong>. Emergency warning signs include*:</p>
+                                    <ul>
+                                    <li>Trouble breathing</li>
+                                    <li>Persistent pain or pressure in the chest</li>
+                                    <li>New confusion or inability to arouse</li>
+                                    <li>Bluish lips or face</li>
+                                    </ul>
+                                    <p>*This list is not all inclusive. Please consult your medical provider for any other symptoms that are severe or concerning.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row card">
+                        <button type="button" class="btn btn-primary faqButton" data-toggle="collapse" data-target="#w45"> 
+                            Should I use soap and water or a hand sanitizer to protect against COVID-19?
+                        </button>
+                        <div id="w45" class="collapse faqCollapse">
+                            <div class="card-body"><p>Most people who get COVID-19 will be able to recover at home. <a href="https://www.cdc.gov/coronavirus/2019-ncov/hcp/guidance-prevent-spread.html">CDC has directions</a> for people who are recovering at home and their caregivers, including:</p>
+                                <p>Handwashing is one of the best ways to protect yourself and your family from getting sick. Wash your hands often with soap and water for at least 20 seconds, especially after blowing your nose, coughing, or sneezing; going to the bathroom; and before eating or preparing food. If soap and water are not readily available, use an alcohol-based hand sanitizer with at least 60% alcohol.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row card">
+                        <button type="button" class="btn btn-primary faqButton" data-toggle="collapse" data-target="#w46"> 
+                            What cleaning products should I use to protect against COVID-19?
+                        </button>
+                        <div id="w46" class="collapse faqCollapse">
+                            <div class="card-body"><p>Most people who get COVID-19 will be able to recover at home. <a href="https://www.cdc.gov/coronavirus/2019-ncov/hcp/guidance-prevent-spread.html">CDC has directions</a> for people who are recovering at home and their caregivers, including:</p>
+                                <p>Clean and disinfect frequently touched surfaces such as tables, doorknobs, light switches, countertops, handles, desks, phones, keyboards, toilets, faucets, and sinks.&nbsp; If surfaces are dirty, clean them using detergent or soap and water prior to disinfection. To disinfect, most common EPA-registered household disinfectants will work. See CDC’s recommendations <a href="https://www.cdc.gov/coronavirus/2019-ncov/prevent-getting-sick/cleaning-disinfection.html">for household cleaning and disinfection</a>.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row card">
+                        <button type="button" class="btn btn-primary faqButton" data-toggle="collapse" data-target="#w47"> 
+                            Should I make my own hand sanitizer if I can’t find it in the stores?
+                        </button>
+                        <div id="w47" class="collapse faqCollapse">
+                            <div class="card-body"><p>Most people who get COVID-19 will be able to recover at home. <a href="https://www.cdc.gov/coronavirus/2019-ncov/hcp/guidance-prevent-spread.html">CDC has directions</a> for people who are recovering at home and their caregivers, including:</p>
+                                <p>CDC recommends handwashing with soap and water for at least 20 seconds or, using alcohol-based hand sanitizer with at least 60% alcohol when soap and water are not available. These actions are part of <a href="https://www.cdc.gov/coronavirus/2019-ncov/prevent-getting-sick/prevention.html">everyday preventive actions</a>&nbsp;individuals can take to slow the spread of respiratory diseases like COVID-19.</p>
+                                <ul>
+                                    <li>When washing hands, you can use plain soap or antibacterial soap. Plain soap is as effective as antibacterial soap at removing germs.</li>
+                                    <li>If soap and water are not readily available, you can use an FDA-approved alcohol-based <a href="https://www.cdc.gov/handwashing/show-me-the-science-hand-sanitizer.html">hand sanitizer</a> that contains at least 60% alcohol. You can tell if the sanitizer contains at least 60% alcohol by looking at the product label.</li>
+                                </ul>
+                                <p>CDC does not encourage the production and use of homemade hand sanitizer <a href="https://www.fda.gov/media/136118/download" class="tp-link-policy" data-domain-ext="gov">products because of concerns over the correct use of the ingredients<span class="sr-only">external icon</span><span class="fi cdc-icon-external x16 fill-external" aria-hidden="true"></span></a> and the need to work under sterile conditions to make the product. Local industries that are looking into producing hand sanitizer to fill in for commercial shortages can refer to the <a href="https://www.who.int/gpsc/5may/Guide_to_Local_Production.pdf" target="new" class="tp-link-policy" data-domain-ext="int">World Health Organization guidance<span class="sr-only">pdf icon</span><span class="fi cdc-icon-pdf x16 fill-pdf" aria-hidden="true"></span><span class="file-details"></span><span class="sr-only">external icon</span><span class="fi cdc-icon-external x16 fill-external" aria-hidden="true"></span></a>.&nbsp;Organizations should revert to the use of commercially produced, FDA-approved product once such supplies again become available.</p>
+                                <ul>
+                                    <li>To be effective against killing some types of germs, <a href="https://www.cdc.gov/handwashing/show-me-the-science-hand-sanitizer.html">hand sanitizers </a>need to have a strength of at least 60% alcohol and be used when hands are not visibly dirty or greasy.</li>
+                                    <li>Do not rely on “Do It Yourself” or “DIY” recipes based solely on essential oils or formulated without correct compounding practices.</li>
+                                    <li>Do not use hand sanitizer to disinfect frequently touched surfaces and objects. <a href="https://www.cdc.gov/coronavirus/2019-ncov/prevent-getting-sick/disinfecting-your-home.html">See CDC’s information for cleaning and sanitizing your home</a>.</li>
+                                </ul>
+                                <p><a href="https://www.cdc.gov/coronavirus/2019-ncov/infection-control/hcp-hand-hygiene-faq.html">See FAQs about hand hygiene for healthcare personnel responding to COVID-2019.</a></p>    
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row myRow">
+                <div class="col-md-12">
+                    <h5> Symptoms & Testing </h5>
+                    <div class="row card">
+                        <button type="button" class="btn btn-primary faqButton" data-toggle="collapse" data-target="#w51"> 
+                            What are the symptoms and complications that COVID-19 can cause?
+                        </button>
+                        <div id="w51" class="collapse faqCollapse">
+                            <p>Current symptoms reported for patients with COVID-19 have included mild to severe respiratory illness with fever<a href="https://www.cdc.gov/coronavirus/2019-ncov/faq.html#footnote1"><sup>1</sup></a>, cough, and difficulty breathing. Read about <a href="/coronavirus/2019-ncov/symptoms-testing/symptoms.html">COVID-19 Symptoms</a>.</p>
+                        </div>
+                    </div>
+                    <div class="row card">
+                        <button type="button" class="btn btn-primary faqButton" data-toggle="collapse" data-target="#w52"> 
+                            Can a person test negative and later test positive for COVID-19?
+                        </button>
+                        <div id="w52" class="collapse faqCollapse">
+                            <p>Using the CDC-developed diagnostic test, a negative result means that the virus that causes COVID-19 was not found in the person’s sample. In the early stages of infection, it is possible the virus will not be detected.
+
+                                For COVID-19, a negative test result for a sample collected while a person has symptoms likely means that the COVID-19 virus is not causing their current illness.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row myRow">
+                <div class="col-md-12">
+                    <h5> About Us </h5>
+                    <div class="row card">
+                        <button type="button" class="btn btn-primary faqButton" data-toggle="collapse" data-target="#w61"> 
+                            Are you authorized for the same?
+                        </button>
+                        <div id="w61" class="collapse faqCollapse">
+                            <p>No, we are not authorized to do the same. We have voluntered to create an awareness. The data displayed are being taken from different trusted sources to show them on a single platform.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="jumbotron text-center" style="margin-bottom:0">
+        <div class="row myRow">
+            <div class="col-md-2"></div>
+            <div class="col-md-3 footerCol">
+                <h5> Pages </h5>
+                <a href="./index.html"> Home </a>
+                <a href="./FAQ.html"> FAQ </a>  
+            </div>
+            <div class="col-md-3 footerCol">
+                <h5> Sources </h5>
+                <a href="https://www.cdc.gov/coronavirus/2019-ncov/"> CDC </a>  
+                <a href="https://www.mohfw.gov.in/"> MOHFW </a>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
+<!-- https://www.cdc.gov -->

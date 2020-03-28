@@ -76,15 +76,15 @@ function fillColor( ) {
     const graphStates = {
         "Level0": {
             class: 'Level0',
-            start: 0
+            start: 1
         },
         "Level1": {
             class: 'Level1',
-            start: 5
+            start: 10
         },
         "Level2": {
             class: 'Level2',
-            start: 20
+            start: 30
         },
         "Level3": {
             class: 'Level3',
