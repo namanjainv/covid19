@@ -18,12 +18,9 @@
 }
 
 path{
-    stroke:black;
+    stroke:white;
     pointer-events:all;
-}
-
-path:hover{
-    stroke:#3B5998;;
+    stroke-width: 1px;
 }
 
 path.Level0 {
@@ -53,6 +50,10 @@ path.Level5 {
 path.Level6 {
     fill: #dd5424;
     pointer-events:all;
+}
+
+path:hover {
+    stroke-width: 2px;
 }
 
 .dashboardMeter-header {

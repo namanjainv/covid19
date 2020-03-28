@@ -108,18 +108,34 @@ function fillColor( ) {
     for( var i = 0; i < mapDOM.children.length; i++ ) {
         mapDOM.children[i].classList.add("default"); 
         let stateName = mapDOM.children[i].getAttribute("name");
+        let content = ''
         if( stateName != null ) {
+            content = '<h5> ' + stateName + ' </h5>';
             if( map[ stateName ] != undefined ) {
                 if( map[ stateName ][ today ] != undefined ) {
+                    content += '<p> Registered Cases: ' + map[ stateName ][ today ][ "Cases Registered" ] + '</p>';
                     let myClass = getMyState( map[ stateName ][ today ][ "Cases Registered" ] );
                     mapDOM.children[i].classList.add(myClass); 
+                }
+                else {
+                    mapDOM.children[i].classList.add("noneArea"); 
+                    content += '<p> No Data Available </p>';
                 }
             }
             else {
                 mapDOM.children[i].classList.add("noneArea"); 
+                content += '<p> No Data Available </p>';
             }  
         }
+        
+        $('svg [name="'+stateName+'"]').tooltip({
+            title: content,
+            html: true,
+            placement: "bottom"
+        });
     }
+
+    
 
     function getMyState( value ) {
         value = parseInt( value );
@@ -138,7 +154,6 @@ function generateGraph( ) {
     states = Object.keys( map );
     states.sort( );
     var select = document.getElementById("stateDropDown"); 
-    console.log( select );
     states.forEach( state => {
         if( state != "Overall" ) {
             var el = document.createElement( 'option' );
@@ -166,9 +181,8 @@ function parseDate( date ) {
     return inString;
 }
 
-function generateSplineChart( ) {
+function generateSplineChart(  ) {
     
-
     var selectedStates = $('#stateDropDown').val( );
 
     var graphJson = [ ];
@@ -202,6 +216,8 @@ function generateSplineChart( ) {
     
     document.getElementById('dashboardMeter-value').innerText = map[ selectedStates ][ parseDate( lastDate ) ][ "Cases Registered" ] ;
 }
+
+
 
 
 
