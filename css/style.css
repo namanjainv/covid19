@@ -1,0 +1,57 @@
+.mainContent {
+    margin-top: 70px;
+    max-height: 30%;
+}
+
+.row {
+    margin-top: 20px;
+}
+
+.map {
+    height: auto;
+    width: 100%;
+}
+
+.mapSVG {
+    height: auto;
+    width: 80%;
+}
+
+path{
+    stroke:black;
+    pointer-events:all;
+}
+
+path:hover{
+    stroke:#3B5998;;
+}
+
+path.Level0 {
+    fill: white;
+    pointer-events:all;
+}
+path.Level1 {
+    fill: #f7c4bd;
+    pointer-events:all;
+}
+path.Level2 {
+    fill: #f4b3ab;
+    pointer-events:all;
+}
+path.Level3 {
+    fill: #eb938a;
+    pointer-events:all;
+}
+path.Level4 {
+    fill: #dc6b62;
+    pointer-events:all;
+}
+path.Level5 {
+    fill: #d04c48;
+    pointer-events:all;
+}
+path.Level6 {
+    fill: #dd5424;
+    pointer-events:all;
+}
+
