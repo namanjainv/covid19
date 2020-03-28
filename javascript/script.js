@@ -148,6 +148,8 @@ function generateGraph( ) {
         }
     });
 
+    document.getElementById('dashboardMeter-value').innerText = map.Overall[ parseDate( lastDate ) ][ "Cases Registered" ] 
+
     generateSplineChart( );
 }
 
@@ -192,7 +194,8 @@ function generateSplineChart( ) {
                 type: 'timeseries',
                 tick: {
                     format: '%d-%m-%Y'
-                }
+                },
+                culling: true
             }
         }
     });
