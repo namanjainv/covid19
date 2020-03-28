@@ -78,12 +78,12 @@ path.Level6 {
 }
 
 .dashboardMeter-label {
-    font-size: 14px;
     color: black;
 }
 
 .dashboardMeter-value {
     font-weight: bolder;
+    font-size: 20px;
     text-align: right;
 }
 

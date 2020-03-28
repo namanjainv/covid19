@@ -193,7 +193,7 @@ function generateSplineChart( ) {
             x: {
                 type: 'timeseries',
                 tick: {
-                    format: '%d-%m-%Y'
+                    format: '%d-%m'
                 },
                 culling: true
             }
