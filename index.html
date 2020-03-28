@@ -140,12 +140,23 @@
 
                 <!-- Graph -->
                 <div class="col-md-6">
-                    <label class="dashboardMeter-header"> Overall Status </label>
+                    
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <select onchange="generateSplineChart()" class="custom-select mb-3" id="stateDropDown">
+                                    <option value='Overall' selected>Overall</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <label class="dashboardMeter-header"> Current Status </label>
                     <div class="row">
                         <div class="col-md-4">
                             <div class="dashboardMeter-unit blueUnit">
                                 <label class="dashboardMeter-label"> Total Cases </label>
-                                <label class="dashboardMeter-value" id="dashboardMeter-value"> 1000 </label>
+                                <label class="dashboardMeter-value" id="dashboardMeter-value">  </label>
                             </div>
                         </div>
                         <!-- <div class="col-md-4">
@@ -161,24 +172,11 @@
                             </div>
                         </div> -->
                     </div> 
-
-                    <div class="myRow"> </div>
-
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <select onchange="generateSplineChart()" class="custom-select mb-3" id="stateDropDown">
-                                    <option value='Overall' selected>Overall</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
                     
-                    <div class="row">
+                    
+                    <div class="row myRow">
                         <div class="col-md-12">
-                            <div id="chart">
-                                
-                            </div>
+                            <div id="chart">  </div>
                         </div>
                     </div>
                 </div>

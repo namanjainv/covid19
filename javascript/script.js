@@ -148,8 +148,6 @@ function generateGraph( ) {
         }
     });
 
-    document.getElementById('dashboardMeter-value').innerText = map.Overall[ parseDate( lastDate ) ][ "Cases Registered" ] 
-
     generateSplineChart( );
 }
 
@@ -169,6 +167,8 @@ function parseDate( date ) {
 }
 
 function generateSplineChart( ) {
+    
+
     var selectedStates = $('#stateDropDown').val( );
 
     var graphJson = [ ];
@@ -199,6 +199,8 @@ function generateSplineChart( ) {
             }
         }
     });
+    
+    document.getElementById('dashboardMeter-value').innerText = map[ selectedStates ][ parseDate( lastDate ) ][ "Cases Registered" ] ;
 }
 
 
