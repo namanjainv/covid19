@@ -3,7 +3,7 @@
     max-height: 30%;
 }
 
-.row {
+.myRow {
     margin-top: 20px;
 }
 
@@ -53,5 +53,37 @@ path.Level5 {
 path.Level6 {
     fill: #dd5424;
     pointer-events:all;
+}
+
+.dashboardMeter-header {
+    font-size: 20px;
+}
+
+.dashboardMeter-unit {
+    display: grid;
+    padding-top: 10px;
+    padding-left: 10px;
+    border-top: dashed black;
+    border-left: dashed black;
+}
+
+.blueUnit {
+    color: #3B5998;
+}
+.greenUnit {
+    color: #3B5998;
+}
+.redUnit {
+    color: #d04c48;
+}
+
+.dashboardMeter-label {
+    font-size: 14px;
+    color: black;
+}
+
+.dashboardMeter-value {
+    font-weight: bolder;
+    text-align: right;
 }
 

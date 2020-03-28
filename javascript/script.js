@@ -66,12 +66,13 @@ function generateStatesMap( data ) {
         }
         
     });
-    console.log( map );
     
     fillColor( );
+    generateGraph(  );
 }
 
 function fillColor( ) {
+    
     const graphStates = {
         "Level0": {
             class: 'Level0',
@@ -133,6 +134,23 @@ function fillColor( ) {
     }
 }
 
+function generateGraph( ) {
+    states = Object.keys( map );
+    states.sort( );
+    var select = document.getElementById("stateDropDown"); 
+    console.log( select );
+    states.forEach( state => {
+        if( state != "Overall" ) {
+            var el = document.createElement( 'option' );
+            el.textContent = state;
+            el.value = state;
+            select.appendChild( el );
+        }
+    });
+
+    generateSplineChart( );
+}
+
 function parseDate( date ) {
     var dd = date.getDate(); 
     var mm = date.getMonth() + 1; 
@@ -144,8 +162,42 @@ function parseDate( date ) {
     if (mm < 10) { 
         mm = '0' + mm; 
     } 
-    var inString = dd + '/' + mm + '/' + yyyy; 
+    var inString = mm + '/' + dd + '/' + yyyy; 
     return inString;
 }
+
+function generateSplineChart( ) {
+    var selectedStates = $('#stateDropDown').val( );
+
+    var graphJson = [ ];
+    Object.keys( map[ selectedStates ] ).forEach( date => {
+        graphJson.push({ 
+            "date": new Date( date ), 
+            "state": selectedStates, 
+            "Cases Registered": map[ selectedStates ][ date ][ "Cases Registered" ] 
+        });
+    } );
+
+    var chart = c3.generate({
+        bindto: '#chart',
+        data: {
+            json: graphJson,
+            keys: {
+                x: 'date', 
+                value: ['Cases Registered'],
+            }
+        },
+        axis: {
+            x: {
+                type: 'timeseries',
+                tick: {
+                    format: '%d-%m-%Y'
+                }
+            }
+        }
+    });
+}
+
+
 
 /**  END OF FUNCTIONS  */
