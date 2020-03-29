@@ -19,9 +19,19 @@ function init(  ) {
     // Ref: https://www.labnol.org/code/covid-19-india-tracker-200325
     // Ref: https://www.freecodecamp.org/news/cjn-google-sheets-as-json-endpoint/
     const sheet_code = '1VTAuLT22gl5aZi3eMACO5mKkOIYxeM5ffW21_1OVymg';
-    let url = 'https://spreadsheets.google.com/feeds/cells/'+sheet_code+'/1/public/full?alt=json'
+    let myData = { };
+    let url = 'https://spreadsheets.google.com/feeds/cells/'+sheet_code+'/1/public/full?alt=json';
     $.getJSON(url, function(data) {
-        generateStatesMap( data.feed.entry );
+        myData[ "Cases Registered" ] = data.feed.entry;
+        url = 'https://spreadsheets.google.com/feeds/cells/'+sheet_code+'/2/public/full?alt=json';
+        $.getJSON(url, function(data) {
+            myData[ "Cases Recovered" ] = data.feed.entry;
+            url = 'https://spreadsheets.google.com/feeds/cells/'+sheet_code+'/3/public/full?alt=json';
+            $.getJSON(url, function(data) {
+                myData[ "Cases Fatal" ] = data.feed.entry;
+                generateStatesMap( myData );
+            });
+        });
     });
 }
 
@@ -30,7 +40,7 @@ function generateStatesMap( data ) {
     const stateColumn = 1;
     let stateRowMap = { };
     let dateColMap = { };
-    data.forEach(spreadSheetCell => {
+    data[ "Cases Registered" ].forEach(spreadSheetCell => {
         // To handle States
         if( parseInt( spreadSheetCell.gs$cell.col ) === stateColumn 
                 && parseInt( spreadSheetCell.gs$cell.row ) > dateRow ) {
@@ -38,6 +48,14 @@ function generateStatesMap( data ) {
                 if( spreadSheetCell.gs$cell.inputValue === "Total Cases In India" ) {
                     map[ "Overall" ] = { }
                     stateRowMap[ spreadSheetCell.gs$cell.row ] = "Overall";
+                }
+                else if( spreadSheetCell.gs$cell.inputValue === "Telengana" ) {
+                    map[ "Telangana" ] = { }
+                    stateRowMap[ spreadSheetCell.gs$cell.row ] = "Telangana";
+                }
+                else if( spreadSheetCell.gs$cell.inputValue === "Odisha" ) {
+                    map[ "Orissa" ] = { }
+                    stateRowMap[ spreadSheetCell.gs$cell.row ] = "Orissa";
                 }
                 else { 
                     map[ spreadSheetCell.gs$cell.inputValue ] = { }
@@ -64,8 +82,27 @@ function generateStatesMap( data ) {
                 "Cases Registered": spreadSheetCell.gs$cell.inputValue
             }
         }
-        
     });
+
+    data[ "Cases Recovered" ].forEach( spreadSheetCell2 => {
+        // To handle Data
+        if( parseInt( spreadSheetCell2.gs$cell.col ) > stateColumn + 1
+                && parseInt( spreadSheetCell2.gs$cell.row ) > dateRow ) {
+            map[ stateRowMap[ spreadSheetCell2.gs$cell.row ] ][ dateColMap[ spreadSheetCell2.gs$cell.col  ] ]["Cases Recovered" ] = spreadSheetCell2.gs$cell.inputValue;
+            
+        }
+    } );
+
+    data[ "Cases Fatal" ].forEach( spreadSheetCell3 => {
+        // To handle Data
+        if( parseInt( spreadSheetCell3.gs$cell.col ) > stateColumn + 1
+                && parseInt( spreadSheetCell3.gs$cell.row ) > dateRow ) {
+            map[ stateRowMap[ spreadSheetCell3.gs$cell.row ] ][ dateColMap[ spreadSheetCell3.gs$cell.col  ] ]["Cases Fatal" ] = spreadSheetCell3.gs$cell.inputValue;
+        }
+
+    } );
+
+    console.log( map );
     
     fillColor( );
     generateGraph(  );
@@ -113,7 +150,9 @@ function fillColor( ) {
             content = '<h5> ' + stateName + ' </h5>';
             if( map[ stateName ] != undefined ) {
                 if( map[ stateName ][ today ] != undefined ) {
-                    content += '<p> Registered Cases: ' + map[ stateName ][ today ][ "Cases Registered" ] + '</p>';
+                    content += '<p> Registered Cases: ' + map[ stateName ][ today ][ "Cases Registered" ] + '<br />';
+                    content += 'Recovered Cases: ' + map[ stateName ][ today ][ "Cases Recovered" ] + '<br />';
+                    content += 'Fatal Cases: ' + map[ stateName ][ today ][ "Cases Fatal" ] + '</p>';
                     let myClass = getMyState( map[ stateName ][ today ][ "Cases Registered" ] );
                     mapDOM.children[i].classList.add(myClass); 
                 }
@@ -190,7 +229,9 @@ function generateSplineChart(  ) {
         graphJson.push({ 
             "date": new Date( date ), 
             "state": selectedStates, 
-            "Cases Registered": map[ selectedStates ][ date ][ "Cases Registered" ] 
+            "Registered Cases": map[ selectedStates ][ date ][ "Cases Registered" ],
+            "Recovered Cases": map[ selectedStates ][ date ][ "Cases Recovered" ],
+            "Fatal Cases": map[ selectedStates ][ date ][ "Cases Fatal" ],
         });
     } );
 
@@ -200,8 +241,13 @@ function generateSplineChart(  ) {
             json: graphJson,
             keys: {
                 x: 'date', 
-                value: ['Cases Registered'],
-            }
+                value: ["Registered Cases", "Recovered Cases", "Fatal Cases" ],
+            },
+            colors: {
+                "Registered Cases": '#3B5998',
+                "Recovered Cases": '#188038',
+                "Fatal Cases": '#d04c48'
+            },
         },
         axis: {
             x: {
@@ -214,7 +260,9 @@ function generateSplineChart(  ) {
         }
     });
     
-    document.getElementById('dashboardMeter-value').innerText = map[ selectedStates ][ parseDate( lastDate ) ][ "Cases Registered" ] ;
+    document.getElementById('dashboardMeter-valueTotal').innerText = map[ selectedStates ][ parseDate( lastDate ) ][ "Cases Registered" ] ;
+    document.getElementById('dashboardMeter-valueRecovered').innerText = map[ selectedStates ][ parseDate( lastDate ) ][ "Cases Recovered" ] ;
+    document.getElementById('dashboardMeter-valueFatal').innerText = map[ selectedStates ][ parseDate( lastDate ) ][ "Cases Fatal" ] ;
 }
 
 
