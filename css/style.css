@@ -110,3 +110,8 @@ path:hover {
     text-align: center;
     padding: 30px;
 }
+
+.footerCell {
+    color: black;
+    margin-top: 10px;
+}
