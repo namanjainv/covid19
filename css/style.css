@@ -104,3 +104,9 @@ path:hover {
     display: grid;
     text-align: left;
 }
+
+.myDetails {
+    font-size: 12px;
+    text-align: center;
+    padding: 30px;
+}
