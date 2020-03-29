@@ -57,6 +57,14 @@ function generateStatesMap( data ) {
                     map[ "Orissa" ] = { }
                     stateRowMap[ spreadSheetCell.gs$cell.row ] = "Orissa";
                 }
+                else if( spreadSheetCell.gs$cell.inputValue === "Uttarakhand" ) {
+                    map[ "Uttaranchal" ] = { }
+                    stateRowMap[ spreadSheetCell.gs$cell.row ] = "Uttaranchal";
+                }
+                else if( spreadSheetCell.gs$cell.inputValue === "Andaman and Nicobar Islands" ) {
+                    map[ "Andaman and Nicobar" ] = { }
+                    stateRowMap[ spreadSheetCell.gs$cell.row ] = "Andaman and Nicobar";
+                }
                 else { 
                     map[ spreadSheetCell.gs$cell.inputValue ] = { }
                     stateRowMap[ spreadSheetCell.gs$cell.row ] = spreadSheetCell.gs$cell.inputValue;
