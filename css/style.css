@@ -15,7 +15,7 @@
 
 .mapSVG {
     height: auto;
-    width: 80%;
+    width: 90%;
 }
 
 path{
@@ -114,4 +114,41 @@ path:hover {
 .footerCell {
     color: black;
     margin-top: 10px;
+}
+
+.testingBox {
+    display: grid;
+    margin: 5px;
+    padding: 10px;
+    border: dashed black;
+}
+
+.testingBox-header {
+    font-size: 18px;
+    font-weight: bolder;
+    margin-bottom: 0px;
+    min-height: 60px;
+}
+
+.testingBox-state {
+    font-size: 12px;
+    text-align: right;
+    margin-bottom: 0px;
+}
+
+.testingBox-phone {
+    color: black;
+    font-size: 15px;
+    margin-bottom: 0px;
+}
+.testingBox-website {
+    color: black;
+    font-size: 14px;
+    margin-bottom: 0px;
+}
+.testingBox-maps {
+    color: black;
+    font-size: 10px;
+    margin-bottom: 0px;
+    text-align: right;
 }

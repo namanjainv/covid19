@@ -30,6 +30,7 @@ function init(  ) {
             $.getJSON(url, function(data) {
                 myData[ "Cases Fatal" ] = data.feed.entry;
                 generateStatesMap( myData );
+                testingCentersData( );
             });
         });
     });
@@ -109,8 +110,6 @@ function generateStatesMap( data ) {
         }
 
     } );
-
-    console.log( map );
     
     fillColor( );
     generateGraph(  );
@@ -230,6 +229,7 @@ function parseDate( date ) {
 
 function generateSplineChart(  ) {
     
+    generateTestingCenterCards( );
     var selectedStates = $('#stateDropDown').val( );
 
     var graphJson = [ ];
@@ -273,8 +273,141 @@ function generateSplineChart(  ) {
     document.getElementById('dashboardMeter-valueFatal').innerText = map[ selectedStates ][ parseDate( lastDate ) ][ "Cases Fatal" ] ;
 }
 
+function testingCentersData( ) {
+    const sheet_code = '1VTAuLT22gl5aZi3eMACO5mKkOIYxeM5ffW21_1OVymg';
+    let myData = [ ];
+    let myMap = { };
+    let url = 'https://spreadsheets.google.com/feeds/cells/'+sheet_code+'/4/public/full?alt=json';
+    $.getJSON(url, function(data) {
+        myData[ "Testing Centers" ] = data.feed.entry;
+        const dataRow = 2;
+        const centerColumn = 1;
+        let centerRowMap = { };
+        data.feed.entry.forEach(spreadSheetCell => {
+            if( parseInt( spreadSheetCell.gs$cell.col ) === centerColumn 
+                    && parseInt( spreadSheetCell.gs$cell.row ) > dataRow ) {
+                centerRowMap[ spreadSheetCell.gs$cell.row ] = spreadSheetCell.gs$cell.inputValue;
+                myMap[ spreadSheetCell.gs$cell.inputValue ] = { }
+            }
+            if( parseInt( spreadSheetCell.gs$cell.col ) === 3 
+                    && parseInt( spreadSheetCell.gs$cell.row ) > dataRow ) {
+                myMap[ centerRowMap[ spreadSheetCell.gs$cell.row ] ][ "phone" ] = "+" + spreadSheetCell.gs$cell.inputValue;
+            }
+            if( parseInt( spreadSheetCell.gs$cell.col ) === 4 
+                    && parseInt( spreadSheetCell.gs$cell.row ) > dataRow ) {
+                myMap[ centerRowMap[ spreadSheetCell.gs$cell.row ] ][ "url" ] = spreadSheetCell.gs$cell.inputValue;
+            }
+            if( parseInt( spreadSheetCell.gs$cell.col ) === 5 
+                    && parseInt( spreadSheetCell.gs$cell.row ) > dataRow ) {
+                myMap[ centerRowMap[ spreadSheetCell.gs$cell.row ] ][ "website" ] = spreadSheetCell.gs$cell.inputValue;
+            }
+            if( parseInt( spreadSheetCell.gs$cell.col ) === 6
+                    && parseInt( spreadSheetCell.gs$cell.row ) > dataRow ) {
+                myMap[ centerRowMap[ spreadSheetCell.gs$cell.row ] ][ "location" ] = spreadSheetCell.gs$cell.inputValue;
+            }
+            if( parseInt( spreadSheetCell.gs$cell.col ) === 2 
+                    && parseInt( spreadSheetCell.gs$cell.row ) > dataRow ) {
+                let state = '';
+                if( spreadSheetCell.gs$cell.inputValue === "Total Cases In India" ) {
+                    state = "Overall";
+                }
+                else if( spreadSheetCell.gs$cell.inputValue === "Telengana" ) {
+                    state = "Telangana";
+                }
+                else if( spreadSheetCell.gs$cell.inputValue === "Odisha" ) {
+                    state = "Orissa";
+                }
+                else if( spreadSheetCell.gs$cell.inputValue === "Uttarakhand" ) {
+                    state = "Uttaranchal";
+                }
+                else if( spreadSheetCell.gs$cell.inputValue === "Andaman and Nicobar Islands" ) {
+                    state = "Andaman and Nicobar";
+                }
+                else { 
+                    state = spreadSheetCell.gs$cell.inputValue;
+                }
+                myMap[ centerRowMap[ spreadSheetCell.gs$cell.row ] ][ "state" ] = state.trim();
+            }
+        });
+        map[ "Testing Centers" ] = myMap;
+    });
+}
 
+function generateTestingCenterCards( ) {
+    var select = $('#stateDropDown').val( );
+    let myData = [ ];
+    let classDom = document.getElementById("testingCenters");   
+    if( select != "Overall" ) {
+        classDom.style.display = 'block';
+        Object.keys( map[ "Testing Centers" ] ).forEach( center => {
+            if( map[ "Testing Centers" ][ center ].state === select ) {
+                myData.push({
+                    "name": center,
+                    "phone": map[ "Testing Centers" ][ center ].phone === undefined ? "Not Available" : map[ "Testing Centers" ][ center ].phone,
+                    "url": map[ "Testing Centers" ][ center ].url === undefined ? "Not Available" : map[ "Testing Centers" ][ center ].url,
+                    "website": map[ "Testing Centers" ][ center ].website === undefined ? "Not Available" : map[ "Testing Centers" ][ center ].website,
+                    "location": map[ "Testing Centers" ][ center ].location === undefined ? "Not Available" : map[ "Testing Centers" ][ center ].location,
+                    "state": map[ "Testing Centers" ][ center ].state === undefined ? "Not Available" : map[ "Testing Centers" ][ center ].state
+                });
+            }
+        });
+        
+        var myDom = document.getElementById("testingCenter"); 
+        if( myData.length > 0 ) {
+            myDom.innerHTML = '';
+            myData.forEach( record => {
+                let bootstrapDom = document.createElement( 'div' );
+                bootstrapDom.className = 'col-md-4';
 
+                let recordDom = document.createElement( 'div' );
+                recordDom.className = 'testingBox';
 
+                let headerLabel = document.createElement( 'label' );
+                headerLabel.className = 'testingBox-header';
+                headerLabel.innerText = record.name;
+                recordDom.appendChild( headerLabel );
+
+                headerLabel = document.createElement( 'label' );
+                headerLabel.className = 'testingBox-state';
+                if( record.location != "Not Available" )
+                    headerLabel.setAttribute( 'href', record.location );
+                headerLabel.innerText = record.location;
+                recordDom.appendChild( headerLabel );
+
+                headerLabel = document.createElement( 'a' );
+                headerLabel.className = 'testingBox-phone';
+                if( record.phone != "Not Available" )
+                    headerLabel.setAttribute( 'href', record.phone );
+                headerLabel.setAttribute( 'href', 'tel:'+record.phone );
+                headerLabel.innerText = record.phone;
+                recordDom.appendChild( headerLabel );
+
+                headerLabel = document.createElement( 'a' );
+                headerLabel.className = 'testingBox-website';
+                if( record.website != "Not Available" )
+                    headerLabel.setAttribute( 'href', record.website );
+                headerLabel.innerText = record.website;
+                recordDom.appendChild( headerLabel );
+
+                headerLabel = document.createElement( 'a' );
+                headerLabel.className = 'testingBox-maps';
+                if( record.url != "Not Available" )
+                    headerLabel.setAttribute( 'href', record.url );
+                headerLabel.setAttribute( 'href', record.url );
+                headerLabel.innerText = record.url;
+                recordDom.appendChild( headerLabel );
+
+                bootstrapDom.appendChild( recordDom );
+                myDom.appendChild( bootstrapDom );
+            });
+        }
+        else {
+            myDom.innerHTML = '<p> No testing center found </p>';
+        }
+    } 
+    else {
+        classDom.style.display = 'none';
+    }
+}
 
 /**  END OF FUNCTIONS  */
