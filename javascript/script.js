@@ -152,33 +152,36 @@ function fillColor( ) {
     for( var i = 0; i < mapDOM.children.length; i++ ) {
         mapDOM.children[i].classList.add("default"); 
         let stateName = mapDOM.children[i].getAttribute("name");
+        let id = getMyStateId( stateName );
         let content = ''
         if( stateName != null ) {
-            content = '<h5> ' + stateName + ' </h5>';
+            content = '<h5> ' + tr[ id ][ currentLanguage ] + ' </h5>';
             if( map[ stateName ] != undefined ) {
                 if( map[ stateName ][ today ] != undefined ) {
-                    content += '<p> Registered Cases: ' + map[ stateName ][ today ][ "Cases Registered" ] + '<br />';
-                    content += 'Recovered Cases: ' + map[ stateName ][ today ][ "Cases Recovered" ] + '<br />';
-                    content += 'Fatal Cases: ' + map[ stateName ][ today ][ "Cases Fatal" ] + '</p>';
+                    content += '<p> ' + tr[ "tc" ][ currentLanguage ] + ': ' + map[ stateName ][ today ][ "Cases Registered" ] + '<br />';
+                    content +=  tr[ "rc" ][ currentLanguage ] + ': ' + map[ stateName ][ today ][ "Cases Recovered" ] + '<br />';
+                    content +=  tr[ "fc" ][ currentLanguage ] + ': ' + map[ stateName ][ today ][ "Cases Fatal" ] + '</p>';
                     let myClass = getMyState( map[ stateName ][ today ][ "Cases Registered" ] );
                     mapDOM.children[i].classList.add(myClass); 
                 }
                 else {
                     mapDOM.children[i].classList.add("noneArea"); 
-                    content += '<p> No Data Available </p>';
+                    content += '<p>' + tr[ "nda" ][ currentLanguage ] + ' </p>';
                 }
             }
             else {
                 mapDOM.children[i].classList.add("noneArea"); 
-                content += '<p> No Data Available </p>';
+                content += '<p> ' + tr[ "nda" ][ currentLanguage ] + ' </p>';
             }  
         }
-        
+
         $('svg [name="'+stateName+'"]').tooltip({
             title: content,
             html: true,
             placement: "bottom"
         });
+        $('svg [name="'+stateName+'"]').tooltip('hide')
+                        .attr('data-original-title', content)
     }
 
     
@@ -196,15 +199,54 @@ function fillColor( ) {
     }
 }
 
+function getMyStateId( stateName ) {
+    let id = 'menu1'
+    statesJSON.forEach( record => { 
+        if( record.state === stateName ) id = record.id; 
+    });
+    return id;
+}
+
+let statesJSON = [ 
+    { state: "Andaman and Nicobar", id: "state1" },
+    { state: "Overall", id: "menu1" },
+    { state: "Andhra Pradesh", id: "state2" },
+    { state: "Bihar", id: "state3" },
+    { state: "Chandigarh", id: "state4" },
+    { state: "Chhattisgarh", id: "state5" },
+    { state: "Delhi", id: "state6" },
+    { state: "Goa", id: "state7" },
+    { state: "Gujarat", id: "state8" },
+    { state: "Haryana", id: "state9" },
+    { state: "Himachal Pradesh", id: "state10" },
+    { state: "Jammu and Kashmir", id: "state11" },
+    { state: "Karnataka", id: "state12" },
+    { state: "Kerala", id: "state13" },
+    { state: "Ladakh", id: "state14" },
+    { state: "Madhya Pradesh", id: "state15" },
+    { state: "Maharashtra", id: "state16" },
+    { state: "Manipur", id: "state17" },
+    { state: "Mizoram", id: "state18" },
+    { state: "Orissa", id: "state19" },
+    { state: "Puducherry", id: "state20" },
+    { state: "Punjab", id: "state21" },
+    { state: "Rajasthan", id: "state22" },
+    { state: "Tamil Nadu", id: "state23" },
+    { state: "Telangana", id: "state24" },
+    { state: "Uttar Pradesh", id: "state25" },
+    { state: "Uttaranchal", id: "state26" },
+    { state: "West Bengal", id: "state27" },
+];
 function generateGraph( ) {
-    states = Object.keys( map );
-    states.sort( );
+    let states = statesJSON;
+    // states.sort( );
     var select = document.getElementById("stateDropDown"); 
-    states.forEach( state => {
-        if( state != "Overall" ) {
+    states.forEach( record => {
+        if( record.state != "Overall" ) {
             var el = document.createElement( 'option' );
-            el.textContent = state;
-            el.value = state;
+            el.textContent = record.state;
+            el.value = record.state;
+            el.setAttribute( 'id', record.id )
             select.appendChild( el );
         }
     });
@@ -256,6 +298,11 @@ function generateSplineChart(  ) {
                 "Recovered Cases": '#188038',
                 "Fatal Cases": '#d04c48'
             },
+            names: {
+                "Registered Cases": tr[ "tc" ][ currentLanguage ],
+                "Recovered Cases": tr[ "rc" ][ currentLanguage ],
+                "Fatal Cases": tr[ "fc" ][ currentLanguage ],
+            }
         },
         axis: {
             x: {
@@ -330,6 +377,7 @@ function testingCentersData( ) {
             }
         });
         map[ "Testing Centers" ] = myMap;
+        console.log( map );
     });
 }
 
@@ -402,7 +450,7 @@ function generateTestingCenterCards( ) {
             });
         }
         else {
-            myDom.innerHTML = '<p> No testing center found </p>';
+            myDom.innerHTML = '<p> ' + tr[ "noTestingCenters" ][ currentLanguage ] + ' </p>';
         }
     } 
     else {
