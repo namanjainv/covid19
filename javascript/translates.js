@@ -98,6 +98,22 @@ let tr = {
       "PA": "ਲਾਈਵ ਟਰੈਕਰ",
       "MAI": "Aroturuki Live"
     },
+    header2: {
+      "Message Code": "header_faq",
+      "EN": "FAQ",
+      "HI": "सामान्य प्रश्न",
+      "BN": "প্রায়শই জিজ্ঞাসিত প্রশ্নাবলী",
+      "MR": "नेहमी विचारले जाणारे प्रश्न",
+      "TL": "Mga Madalas Itanong",
+      "TA": "அடிக்கடி கேட்கப்படும் கேள்விகள்",
+      "UR": "عمومی سوالات",
+      "GU": "વારંવાર પૂછાતા પ્રશ્નો",
+      "KAN": "ಎಫ್ಎಕ್ಯೂ",
+      "MAL": "പതിവുചോദ്യങ്ങൾ",
+      "OR": "ସମ୍ଭାବିତ ପ୍ରଶ୍ନ",
+      "PA": "ਸਵਾਲ",
+      "MAI": "FAQ"
+    },
     menu1: {
       "Message Code": "menu1",
       "EN": "Overall",
@@ -1395,6 +1411,23 @@ let tr = {
           "PA": "ਕੋਈ, ਸਾਨੂੰ ਵੀ ਉਸੇ ਨੂੰ ਕੀ ਕਰਨ ਦਾ ਅਧਿਕਾਰ ਨਹੀ ਕਰ ਰਹੇ ਹਨ. ਸਾਨੂੰ ਇੱਕ ਜਾਗਰੂਕਤਾ ਪੈਦਾ ਕਰਨ ਲਈ voluntered ਹੈ. ਪ੍ਰਦਰਸ਼ਿਤ ਡਾਟਾ ਨੂੰ ਇੱਕ ਸਿੰਗਲ ਪਲੇਟਫਾਰਮ 'ਤੇ ਦਿਖਾਉਣ ਲਈ ਵੱਖ-ਵੱਖ ਭਰੋਸੇਯੋਗ ਸਰੋਤ ਤੱਕ ਲਿਆ ਜਾ ਰਿਹਾ ਹੈ.",
           "MAI": "No, e kore e tatou mana ki te mahi i te taua. Kua voluntered matou ki te hanga i tētahi mōhiotanga. Kei te mau nga raraunga whakaaturia i rerekē puna whakawhirinaki ki te whakaatu ia ratou i runga i te turanga kotahi."
         },
+        faqq1: {
+            "Message Code": "faqa21",
+            "EN": "What is Corona Virus?",
+            "HI": "कोरोना वायरस क्या है?",
+            "BN": "করোনা ভাইরাস কি?",
+            "MR": "कोरोना व्हायरस काय आहे?",
+            "TE": "కరోనా వైరస్ అంటే ఏమిటి?",
+            "TA": "கொரோனா வைரஸ் என்ன?",
+            "UR": "پربامنڈل وائرس کیا ہے؟",
+            "GU": "કોરોના વાયરસ શું છે?",
+            "KAN": "ಕರೋನಾ ವೈರಸ್ ಎಂದರೇನು?",
+            "MAL": "കൊറോണ വൈറസ് എന്താണ്?",
+            "OR": "Corona ରେ ଭାଇରସ୍ କଣ?",
+            "PA": "Corona ਵਾਇਰਸ ਕੀ ਹੁੰਦਾ ਹੈ?",
+            "MAI": " "
+
+        },
         nda:{
           "Message Code": "nda",
           "EN": "No data available",
@@ -1445,14 +1478,38 @@ let tr = {
         }
 }
 
-function changeLanguage() {
-    currentLanguage = $('#languageDropDown').val( );
-    translate( );
-    generateSplineChart( );
-    fillColor( );
+let hrefTags = [ 'header_home', 'footer_home', 'header_faq', 'footer_faq' ];
+
+function changeAnchors( ) {
+    hrefTags.forEach( id => {
+        let dom = document.getElementById( id )
+        if( dom != null ) {
+            var myHyperRef = dom.getAttribute( 'href' ).split('?')[0];
+            dom.setAttribute( 'href', myHyperRef + '?ln=' + currentLanguage );
+        }
+    });
 }
 
-// let l = document.url.searchParams.get("l");
+
+function changeLanguage() {
+    currentLanguage = $('#languageDropDown').val( );
+    changeLanguageSelf( );
+    translate( );
+    changeAnchors( );
+}
+
+setTimeout( function() {
+    const url = window.location.href;
+    let start = url.indexOf( "ln=" );
+    if( start === -1 ) 
+        currentLanguage = "EN"
+    else
+        currentLanguage = url.substring( start + 3 );
+    
+    let element = document.getElementById('languageDropDown');
+    element.value = currentLanguage;
+    changeLanguage( );
+}, 1000 );
 
 translate = function( ) {
     Object.keys( tr ).forEach( function( id ) {
