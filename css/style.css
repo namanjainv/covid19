@@ -62,6 +62,7 @@ path:hover {
 }
 
 .dashboardMeter-unit {
+    margin: 3px;
     display: grid;
     padding-top: 10px;
     padding-left: 10px;
@@ -70,20 +71,22 @@ path:hover {
 }
 
 .blueUnit {
-    color: #3B5998;
+    color: steelblue;
 }
 .greenUnit {
-    color: #188038;
+    color: teal;
 }
 .redUnit {
-    color: #d04c48;
+    color: brown;
 }
 
 .dashboardMeter-label {
-    color: black;
+    margin-bottom: 0px;
+    font-size: 18px;
 }
 
 .dashboardMeter-value {
+    margin-bottom: 0px;
     font-weight: bolder;
     font-size: 20px;
     text-align: right;
@@ -151,4 +154,16 @@ path:hover {
     font-size: 10px;
     margin-bottom: 0px;
     text-align: right;
+}
+
+.dashboardMeter-analysis {
+    margin-bottom: 0px;
+    text-align: right;
+    font-size: 12px;
+    font-weight: bolder;
+    color: black;
+}
+
+.footerCol{
+    padding: 20px;
 }

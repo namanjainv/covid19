@@ -124,27 +124,27 @@ function fillColor( ) {
         },
         "Level1": {
             class: 'Level1',
-            start: 10
+            start: 25
         },
         "Level2": {
             class: 'Level2',
-            start: 30
+            start: 50
         },
         "Level3": {
             class: 'Level3',
-            start: 50
+            start: 100
         },
         "Level4": {
             class: 'Level4',
-            start: 100
+            start: 200
         },
         "Level5": {
             class: 'Level5',
-            start: 200
+            start: 300
         },
         "Level6": {
             class: 'Level6',
-            start: 300
+            start: 500
         }
     }
     let today = parseDate( lastDate );
@@ -158,9 +158,10 @@ function fillColor( ) {
             content = '<h5> ' + tr[ id ][ currentLanguage ] + ' </h5>';
             if( map[ stateName ] != undefined ) {
                 if( map[ stateName ][ today ] != undefined ) {
-                    content += '<p> ' + tr[ "tc" ][ currentLanguage ] + ': ' + map[ stateName ][ today ][ "Cases Registered" ] + '<br />';
-                    content +=  tr[ "rc" ][ currentLanguage ] + ': ' + map[ stateName ][ today ][ "Cases Recovered" ] + '<br />';
-                    content +=  tr[ "fc" ][ currentLanguage ] + ': ' + map[ stateName ][ today ][ "Cases Fatal" ] + '</p>';
+                    content += '<p> ' + tr[ "total" ][ currentLanguage ] + ': ' + map[ stateName ][ today ][ "Cases Registered" ] + '<br />';
+                    content +=  tr[ "active" ][ currentLanguage ] + ': ' + ( parseInt(map[ stateName ][ today ][ "Cases Registered" ]) - parseInt( map[ stateName ][ today ][ "Cases Recovered" ]  ) ) + '<br />';
+                    content +=  tr[ "cured" ][ currentLanguage ] + ': ' + map[ stateName ][ today ][ "Cases Recovered" ] + '<br />';
+                    content +=  tr[ "death" ][ currentLanguage ] + ': ' + map[ stateName ][ today ][ "Cases Fatal" ] + '</p>';
                     let myClass = getMyState( map[ stateName ][ today ][ "Cases Registered" ] );
                     mapDOM.children[i].classList.add(myClass); 
                 }
@@ -208,41 +209,48 @@ function getMyStateId( stateName ) {
 }
 
 let statesJSON = [ 
-    { state: "Andaman and Nicobar", id: "state1" },
-    { state: "Overall", id: "menu1" },
-    { state: "Andhra Pradesh", id: "state2" },
-    { state: "Bihar", id: "state3" },
-    { state: "Chandigarh", id: "state4" },
-    { state: "Chhattisgarh", id: "state5" },
-    { state: "Delhi", id: "state6" },
-    { state: "Goa", id: "state7" },
-    { state: "Gujarat", id: "state8" },
-    { state: "Haryana", id: "state9" },
-    { state: "Himachal Pradesh", id: "state10" },
-    { state: "Jammu and Kashmir", id: "state11" },
-    { state: "Karnataka", id: "state12" },
-    { state: "Kerala", id: "state13" },
-    { state: "Ladakh", id: "state14" },
-    { state: "Madhya Pradesh", id: "state15" },
-    { state: "Maharashtra", id: "state16" },
-    { state: "Manipur", id: "state17" },
-    { state: "Mizoram", id: "state18" },
-    { state: "Orissa", id: "state19" },
-    { state: "Puducherry", id: "state20" },
-    { state: "Punjab", id: "state21" },
-    { state: "Rajasthan", id: "state22" },
-    { state: "Tamil Nadu", id: "state23" },
-    { state: "Telangana", id: "state24" },
-    { state: "Uttar Pradesh", id: "state25" },
-    { state: "Uttaranchal", id: "state26" },
-    { state: "West Bengal", id: "state27" },
+    { active: true, state: "Andaman and Nicobar", id: "state1" },
+    { active: true, state: "Overall", id: "menu1" },
+    { active: true, state: "Andhra Pradesh", id: "state2" },
+    { active: true, state: "Assam", id: "state30" },
+    { active: true, state: "Bihar", id: "state3" },
+    { active: true, state: "Chandigarh", id: "state4" },
+    { active: true, state: "Chhattisgarh", id: "state5" },
+    { active: true, state: "Delhi", id: "state6" },
+    { active: true, state: "Goa", id: "state7" },
+    { active: true, state: "Gujarat", id: "state8" },
+    { active: true, state: "Haryana", id: "state9" },
+    { active: true, state: "Himachal Pradesh", id: "state10" },
+    { active: true, state: "Jammu and Kashmir", id: "state11" },
+    { active: true, state: "Jharkhand", id: "state28" },
+    { active: true, state: "Karnataka", id: "state12" },
+    { active: true, state: "Kerala", id: "state13" },
+    { active: true, state: "Ladakh", id: "state14" },
+    { active: true, state: "Madhya Pradesh", id: "state15" },
+    { active: true, state: "Maharashtra", id: "state16" },
+    { active: true, state: "Manipur", id: "state17" },
+    { active: true, state: "Mizoram", id: "state18" },
+    { active: true, state: "Orissa", id: "state19" },
+    { active: true, state: "Puducherry", id: "state20" },
+    { active: true, state: "Punjab", id: "state21" },
+    { active: true, state: "Rajasthan", id: "state22" },
+    { active: true, state: "Tamil Nadu", id: "state23" },
+    { active: true, state: "Telangana", id: "state24" },
+    { active: true, state: "Uttar Pradesh", id: "state25" },
+    { active: true, state: "Uttaranchal", id: "state26" },
+    { active: true, state: "West Bengal", id: "state27" },
+    { active: false, state: "Meghalaya", id: "state29" },
+    { active: false, state: "Nagaland", id: "state31" },
+    { active: false, state: "Arunachal Pradesh", id: "state32" },
+    { active: false, state: "Sikkim", id: "state33" },
+    { active: false, state: "Tripura", id: "state34" },
 ];
 function generateGraph( ) {
     let states = statesJSON;
     // states.sort( );
     var select = document.getElementById("stateDropDown"); 
     states.forEach( record => {
-        if( record.state != "Overall" ) {
+        if( record.state != "Overall" && record.active === true ) {
             var el = document.createElement( 'option' );
             el.textContent = record.state;
             el.value = record.state;
@@ -299,9 +307,9 @@ function generateSplineChart(  ) {
                 "Fatal Cases": '#d04c48'
             },
             names: {
-                "Registered Cases": tr[ "tc" ][ currentLanguage ],
-                "Recovered Cases": tr[ "rc" ][ currentLanguage ],
-                "Fatal Cases": tr[ "fc" ][ currentLanguage ],
+                "Registered Cases": tr[ "total" ][ currentLanguage ],
+                "Recovered Cases": tr[ "cured" ][ currentLanguage ],
+                "Fatal Cases": tr[ "death" ][ currentLanguage ],
             }
         },
         axis: {
@@ -316,6 +324,7 @@ function generateSplineChart(  ) {
     });
     
     document.getElementById('dashboardMeter-valueTotal').innerText = map[ selectedStates ][ parseDate( lastDate ) ][ "Cases Registered" ] ;
+    document.getElementById('dashboardMeter-valueActive').innerText = parseInt( map[ selectedStates ][ parseDate( lastDate ) ][ "Cases Registered" ] ) - parseInt( map[ selectedStates ][ parseDate( lastDate ) ][ "Cases Recovered" ] ) ;
     document.getElementById('dashboardMeter-valueRecovered').innerText = map[ selectedStates ][ parseDate( lastDate ) ][ "Cases Recovered" ] ;
     document.getElementById('dashboardMeter-valueFatal').innerText = map[ selectedStates ][ parseDate( lastDate ) ][ "Cases Fatal" ] ;
 }
