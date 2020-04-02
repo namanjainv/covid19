@@ -66,6 +66,22 @@ let tr = {
       "PA": "ਮੁੱਖ",
       "MAI": "Kāinga"
     },
+    yesterday: {
+      "Message Code": "yesterday",
+      "EN": "since yesterday",
+      "HI": "कल से",
+      "BN": "গতকাল থেকে",
+      "MR": "कालपासून",
+      "TE": "నిన్నటి నుంచి",
+      "TA": "நேற்றிலிருந்து",
+      "UR": "کل سے اب تک",
+      "GU": "ગઈકાલેથી",
+      "KAN": "ನಿನ್ನೆಯಿಂದ",
+      "MAL": "ഇന്നലെ മുതൽ",
+      "OR": "ଗତକାଲି ଯେହେତୁ",
+      "PA": "ਕੱਲ੍ਹ ਬਾਅਦ",
+      "MAI": ""
+    },
     footer_faq: {
       "Message Code": "header_faq",
       "EN": "FAQ",

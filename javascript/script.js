@@ -110,6 +110,12 @@ function generateStatesMap( data ) {
         }
 
     } );
+
+    Object.keys( map ).forEach( state => {
+        Object.keys( map[ state ] ).forEach( date => {
+            map[state][date][ "Cases Active" ] = parseInt( map[ state ][ date ][ "Cases Registered" ] ) - parseInt( map[ state ][ date ][ "Cases Recovered" ] ) - parseInt( map[ state ][ date ][ "Cases Fatal" ] );
+        });
+    } );
     
     fillColor( );
     generateGraph(  );
@@ -159,7 +165,7 @@ function fillColor( ) {
             if( map[ stateName ] != undefined ) {
                 if( map[ stateName ][ today ] != undefined ) {
                     content += '<p> ' + tr[ "total" ][ currentLanguage ] + ': ' + map[ stateName ][ today ][ "Cases Registered" ] + '<br />';
-                    content +=  tr[ "active" ][ currentLanguage ] + ': ' + ( parseInt(map[ stateName ][ today ][ "Cases Registered" ]) - parseInt( map[ stateName ][ today ][ "Cases Recovered" ]  ) ) + '<br />';
+                    content +=  tr[ "active" ][ currentLanguage ] + ': ' + (map[ stateName ][ today ][ "Cases Active" ] + '<br />' );
                     content +=  tr[ "cured" ][ currentLanguage ] + ': ' + map[ stateName ][ today ][ "Cases Recovered" ] + '<br />';
                     content +=  tr[ "death" ][ currentLanguage ] + ': ' + map[ stateName ][ today ][ "Cases Fatal" ] + '</p>';
                     let myClass = getMyState( map[ stateName ][ today ][ "Cases Registered" ] );
@@ -290,6 +296,7 @@ function generateSplineChart(  ) {
             "Registered Cases": map[ selectedStates ][ date ][ "Cases Registered" ],
             "Recovered Cases": map[ selectedStates ][ date ][ "Cases Recovered" ],
             "Fatal Cases": map[ selectedStates ][ date ][ "Cases Fatal" ],
+            "Active Cases": map[ selectedStates ][ date ][ "Cases Active" ],
         });
     } );
 
@@ -299,15 +306,17 @@ function generateSplineChart(  ) {
             json: graphJson,
             keys: {
                 x: 'date', 
-                value: ["Registered Cases", "Recovered Cases", "Fatal Cases" ],
+                value: ["Registered Cases",  "Active Cases", "Recovered Cases", "Fatal Cases" ],
             },
             colors: {
-                "Registered Cases": '#3B5998',
+                "Registered Cases": '#000000',
+                "Active Cases": '#3B5998',
                 "Recovered Cases": '#188038',
                 "Fatal Cases": '#d04c48'
             },
             names: {
                 "Registered Cases": tr[ "total" ][ currentLanguage ],
+                "Active Cases": tr[ "active" ][ currentLanguage ],
                 "Recovered Cases": tr[ "cured" ][ currentLanguage ],
                 "Fatal Cases": tr[ "death" ][ currentLanguage ],
             }
@@ -323,10 +332,46 @@ function generateSplineChart(  ) {
         }
     });
     
+    let previousDay = new Date( lastDate - 1000*60*60*24 );
     document.getElementById('dashboardMeter-valueTotal').innerText = map[ selectedStates ][ parseDate( lastDate ) ][ "Cases Registered" ] ;
-    document.getElementById('dashboardMeter-valueActive').innerText = parseInt( map[ selectedStates ][ parseDate( lastDate ) ][ "Cases Registered" ] ) - parseInt( map[ selectedStates ][ parseDate( lastDate ) ][ "Cases Recovered" ] ) ;
+    let prevTotal = parseInt( map[ selectedStates ][ parseDate( lastDate ) ][ "Cases Registered" ] ) - parseInt( map[ selectedStates ][ parseDate( previousDay ) ][ "Cases Registered" ] );
+    if( prevTotal > 0 ) {
+        document.getElementById('dashboardMeter-valueTotalAnalysis').innerHTML = "+" + prevTotal + " <span style='color: black; font-size: smaller'>" + tr[ "yesterday" ][ currentLanguage ] + " </span>";
+        document.getElementById('dashboardMeter-valueTotalAnalysis').style.color = "red";
+    }
+    else {
+        document.getElementById('dashboardMeter-valueTotalAnalysis').innerHTML = prevTotal + " <span style='color: black; font-size: smaller'>" + tr[ "yesterday" ][ currentLanguage ] + " </span>";
+        document.getElementById('dashboardMeter-valueTotalAnalysis').style.color = "green";
+    }
+
+    document.getElementById('dashboardMeter-valueActive').innerText = map[ selectedStates ][ parseDate( lastDate ) ][ "Cases Active" ] ;
+    let prevActive = parseInt( map[ selectedStates ][ parseDate( lastDate ) ][ "Cases Active" ] ) - parseInt( map[ selectedStates ][ parseDate( previousDay ) ][ "Cases Active" ] );
+    if( prevActive > 0 ) {
+        document.getElementById('dashboardMeter-valueActiveAnalysis').innerHTML = "+" + prevActive + " <span style='color: black; font-size: smaller'>" + tr[ "yesterday" ][ currentLanguage ] + " </span>";
+        document.getElementById('dashboardMeter-valueActiveAnalysis').style.color = "red";
+    }
+    else {
+        document.getElementById('dashboardMeter-valueActiveAnalysis').innerHTML = prevActive + " <span style='color: black; font-size: smaller'>" + tr[ "yesterday" ][ currentLanguage ] + " </span>";
+        document.getElementById('dashboardMeter-valueActiveAnalysis').style.color = "green";
+    }
+
     document.getElementById('dashboardMeter-valueRecovered').innerText = map[ selectedStates ][ parseDate( lastDate ) ][ "Cases Recovered" ] ;
+    let prevRecovered = parseInt( map[ selectedStates ][ parseDate( lastDate ) ][ "Cases Recovered" ] ) - parseInt( map[ selectedStates ][ parseDate( previousDay ) ][ "Cases Recovered" ] );
+    if( prevRecovered > 0 ) {
+        document.getElementById('dashboardMeter-valueRecoveredAnalysis').innerHTML = "+" + prevRecovered + " <span style='color: black; font-size: smaller'>" + tr[ "yesterday" ][ currentLanguage ] + " </span>";
+        document.getElementById('dashboardMeter-valueRecoveredAnalysis').style.color = "green";
+    }
+    else {
+        document.getElementById('dashboardMeter-valueRecoveredAnalysis').innerHTML = prevRecovered  + " <span style='color: black; font-size: smaller'>" + tr[ "yesterday" ][ currentLanguage ] + " </span>";
+        document.getElementById('dashboardMeter-valueRecoveredAnalysis').style.color = "red";
+    }
+    
     document.getElementById('dashboardMeter-valueFatal').innerText = map[ selectedStates ][ parseDate( lastDate ) ][ "Cases Fatal" ] ;
+    let prevFatal = parseInt( map[ selectedStates ][ parseDate( lastDate ) ][ "Cases Fatal" ] ) - parseInt( map[ selectedStates ][ parseDate( previousDay ) ][ "Cases Fatal" ] );
+    if( prevFatal > 0 ) {
+        document.getElementById('dashboardMeter-valueFatalAnalysis').innerHTML = "+" + prevFatal + " <span style='color: black; font-size: smaller'>" + tr[ "yesterday" ][ currentLanguage ] + " </span>";
+        document.getElementById('dashboardMeter-valueFatalAnalysis').style.color = "red";
+    }
 }
 
 function testingCentersData( ) {
