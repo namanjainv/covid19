@@ -372,6 +372,10 @@ function generateSplineChart(  ) {
         document.getElementById('dashboardMeter-valueFatalAnalysis').innerHTML = "+" + prevFatal + " <span style='color: black; font-size: smaller'>" + tr[ "yesterday" ][ currentLanguage ] + " </span>";
         document.getElementById('dashboardMeter-valueFatalAnalysis').style.color = "red";
     }
+    else {
+        document.getElementById('dashboardMeter-valueFatalAnalysis').innerHTML = "+" + prevFatal + " <span style='color: black; font-size: smaller'>" + tr[ "yesterday" ][ currentLanguage ] + " </span>";
+        document.getElementById('dashboardMeter-valueFatalAnalysis').style.display = "none";
+    }
 }
 
 function testingCentersData( ) {
