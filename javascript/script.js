@@ -218,6 +218,7 @@ let statesJSON = [
     { active: true, state: "Andaman and Nicobar", id: "state1" },
     { active: true, state: "Overall", id: "menu1" },
     { active: true, state: "Andhra Pradesh", id: "state2" },
+    { active: true, state: "Arunachal Pradesh", id: "state32" },
     { active: true, state: "Assam", id: "state30" },
     { active: true, state: "Bihar", id: "state3" },
     { active: true, state: "Chandigarh", id: "state4" },
@@ -247,7 +248,6 @@ let statesJSON = [
     { active: true, state: "West Bengal", id: "state27" },
     { active: false, state: "Meghalaya", id: "state29" },
     { active: false, state: "Nagaland", id: "state31" },
-    { active: false, state: "Arunachal Pradesh", id: "state32" },
     { active: false, state: "Sikkim", id: "state33" },
     { active: false, state: "Tripura", id: "state34" },
 ];
