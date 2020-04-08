@@ -243,13 +243,13 @@ let statesJSON = [
     { active: true, state: "Rajasthan", id: "state22" },
     { active: true, state: "Tamil Nadu", id: "state23" },
     { active: true, state: "Telangana", id: "state24" },
+    { active: true, state: "Tripura", id: "state34" },
     { active: true, state: "Uttar Pradesh", id: "state25" },
     { active: true, state: "Uttaranchal", id: "state26" },
     { active: true, state: "West Bengal", id: "state27" },
     { active: false, state: "Meghalaya", id: "state29" },
     { active: false, state: "Nagaland", id: "state31" },
     { active: false, state: "Sikkim", id: "state33" },
-    { active: false, state: "Tripura", id: "state34" },
 ];
 function generateGraph( ) {
     let states = statesJSON;
