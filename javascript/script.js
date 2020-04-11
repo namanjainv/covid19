@@ -130,27 +130,27 @@ function fillColor( ) {
         },
         "Level1": {
             class: 'Level1',
-            start: 25
+            start: 100
         },
         "Level2": {
             class: 'Level2',
-            start: 50
+            start: 250
         },
         "Level3": {
             class: 'Level3',
-            start: 100
+            start: 500
         },
         "Level4": {
             class: 'Level4',
-            start: 200
+            start: 1000
         },
         "Level5": {
             class: 'Level5',
-            start: 300
+            start: 1500
         },
         "Level6": {
             class: 'Level6',
-            start: 500
+            start: 2000
         }
     }
     let today = parseDate( lastDate );
