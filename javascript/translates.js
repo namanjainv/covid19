@@ -4,7 +4,7 @@ let currentLanguage = 'EN';
 let tr = {
     main: {
       "Message Code": "main",
-      "EN": "Covid-19 Tracker",
+      "EN": "COVID-19 Tracker",
       "HI": "कोविद -१९ ट्रैकर",
       "BN": "কোভিড -১৯ ট্র্যাকার",
       "MR": "कोविड -१९ ट्रॅकर",
@@ -16,7 +16,7 @@ let tr = {
       "MAL": "കോവിഡ് -19 ട്രാക്കർ",
       "OR": "କୋଭିଡ୍ -19 ଟ୍ରାକର୍ |",
       "PA": "ਕੋਵਿਡ -19 ਟਰੈਕਰ",
-      "MAI": "Covid-19 Tracker"
+      "MAI": "COVID-19 Tracker"
     },
     header_home: {
       "Message Code": "header_home",
@@ -1709,6 +1709,9 @@ setTimeout( function() {
 translate = function( ) {
     Object.keys( tr ).forEach( function( id ) {
         if( document.getElementById( id ) != null )
+          if( tr[ id ][ currentLanguage ] != undefined )
             document.getElementById( id ).innerHTML = tr[ id ][ currentLanguage ];
+          else 
+            document.getElementById( id ).innerHTML = tr[ id ][ "EN" ];
     } );
 };

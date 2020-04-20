@@ -158,6 +158,12 @@ function fillColor( ) {
     for( var i = 0; i < mapDOM.children.length; i++ ) {
         mapDOM.children[i].classList.add("default"); 
         let stateName = mapDOM.children[i].getAttribute("name");
+        mapDOM.children[i].addEventListener("click", function( e ) {
+
+            let element = document.getElementById('stateDropDown');
+            element.value = e.target.getAttribute('name');
+            generateGraph( );
+        });
         let id = getMyStateId( stateName );
         let content = ''
         if( stateName != null ) {
@@ -236,6 +242,7 @@ let statesJSON = [
     { active: true, state: "Madhya Pradesh", id: "state15" },
     { active: true, state: "Maharashtra", id: "state16" },
     { active: true, state: "Manipur", id: "state17" },
+    { active: true, state: "Meghalaya", id: "state29" },
     { active: true, state: "Mizoram", id: "state18" },
     { active: true, state: "Orissa", id: "state19" },
     { active: true, state: "Puducherry", id: "state20" },
@@ -247,7 +254,6 @@ let statesJSON = [
     { active: true, state: "Uttar Pradesh", id: "state25" },
     { active: true, state: "Uttaranchal", id: "state26" },
     { active: true, state: "West Bengal", id: "state27" },
-    { active: false, state: "Meghalaya", id: "state29" },
     { active: false, state: "Nagaland", id: "state31" },
     { active: false, state: "Sikkim", id: "state33" },
 ];
@@ -371,6 +377,7 @@ function generateSplineChart(  ) {
     if( prevFatal > 0 ) {
         document.getElementById('dashboardMeter-valueFatalAnalysis').innerHTML = "+" + prevFatal + " <span style='color: black; font-size: smaller'>" + tr[ "yesterday" ][ currentLanguage ] + " </span>";
         document.getElementById('dashboardMeter-valueFatalAnalysis').style.color = "red";
+        document.getElementById('dashboardMeter-valueFatalAnalysis').style.display = "block";
     }
     else {
         document.getElementById('dashboardMeter-valueFatalAnalysis').innerHTML = "+" + prevFatal + " <span style='color: black; font-size: smaller'>" + tr[ "yesterday" ][ currentLanguage ] + " </span>";
