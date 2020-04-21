@@ -74,7 +74,7 @@ function generateStatesMap( data ) {
         }
 
         // To handle Dates
-        if( parseInt( spreadSheetCell.gs$cell.col ) > stateColumn 
+        if( parseInt( spreadSheetCell.gs$cell.col ) > stateColumn + 1
                 && parseInt( spreadSheetCell.gs$cell.row ) === dateRow ) {
             var dateParts = spreadSheetCell.gs$cell.inputValue.split(" ")[0].split("/");
             let currDate = new Date( dateParts[2], dateParts[1] - 1, dateParts[0] ); 
@@ -83,10 +83,14 @@ function generateStatesMap( data ) {
             
             dateColMap[ spreadSheetCell.gs$cell.col ] = parseDate( currDate );
         }
+    });
 
+    data[ "Cases Registered" ].forEach(spreadSheetCell => {
         // To handle Data
+        
         if( parseInt( spreadSheetCell.gs$cell.col ) > stateColumn + 1
                 && parseInt( spreadSheetCell.gs$cell.row ) > dateRow ) {
+            console.log(  spreadSheetCell.gs$cell.row  + " " + dateColMap[ spreadSheetCell.gs$cell.col  ] )
             map[ stateRowMap[ spreadSheetCell.gs$cell.row ] ][ dateColMap[ spreadSheetCell.gs$cell.col  ] ] = {
                 "Cases Registered": spreadSheetCell.gs$cell.inputValue
             }
@@ -112,11 +116,12 @@ function generateStatesMap( data ) {
     } );
 
     Object.keys( map ).forEach( state => {
-        Object.keys( map[ state ] ).forEach( date => {
-            map[state][date][ "Cases Active" ] = parseInt( map[ state ][ date ][ "Cases Registered" ] ) - parseInt( map[ state ][ date ][ "Cases Recovered" ] ) - parseInt( map[ state ][ date ][ "Cases Fatal" ] );
-        });
+        if( state != "Testing Centers")
+            Object.keys( map[ state ] ).forEach( date => {
+                map[state][date][ "Cases Active" ] = parseInt( map[ state ][ date ][ "Cases Registered" ] ) - parseInt( map[ state ][ date ][ "Cases Recovered" ] ) - parseInt( map[ state ][ date ][ "Cases Fatal" ] );
+            });
     } );
-    
+
     fillColor( );
     generateGraph(  );
 }
@@ -442,7 +447,6 @@ function testingCentersData( ) {
             }
         });
         map[ "Testing Centers" ] = myMap;
-        console.log( map );
     });
 }
 
