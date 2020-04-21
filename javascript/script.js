@@ -155,7 +155,7 @@ function fillColor( ) {
         },
         "Level6": {
             class: 'Level6',
-            start: 3200
+            start: 3400
         }
     }
     let today = parseDate( lastDate );
