@@ -115,7 +115,6 @@ function generateStatesMap( data ) {
     } );
 
     let changeDate = new Date( "05/30/2020" );
-    console.log( changeDate );
     Object.keys( map ).forEach( state => {
         if( state != "Testing Centers")
             Object.keys( map[ state ] ).forEach( date => {
@@ -175,7 +174,7 @@ function fillColor( ) {
 
             let element = document.getElementById('stateDropDown');
             element.value = e.target.getAttribute('name');
-            generateGraph( );
+            generateSplineChart( );
         });
         let id = getMyStateId( stateName );
         let content = ''
@@ -257,18 +256,18 @@ let statesJSON = [
     { active: true, state: "Manipur", id: "state17" },
     { active: true, state: "Meghalaya", id: "state29" },
     { active: true, state: "Mizoram", id: "state18" },
+    { active: true, state: "Nagaland", id: "state31" },
     { active: true, state: "Orissa", id: "state19" },
     { active: true, state: "Puducherry", id: "state20" },
     { active: true, state: "Punjab", id: "state21" },
     { active: true, state: "Rajasthan", id: "state22" },
+    { active: true, state: "Sikkim", id: "state33" },
     { active: true, state: "Tamil Nadu", id: "state23" },
     { active: true, state: "Telangana", id: "state24" },
     { active: true, state: "Tripura", id: "state34" },
     { active: true, state: "Uttar Pradesh", id: "state25" },
     { active: true, state: "Uttaranchal", id: "state26" },
     { active: true, state: "West Bengal", id: "state27" },
-    { active: false, state: "Nagaland", id: "state31" },
-    { active: false, state: "Sikkim", id: "state33" },
 ];
 function generateGraph( ) {
     let states = statesJSON;
