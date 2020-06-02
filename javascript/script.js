@@ -90,7 +90,6 @@ function generateStatesMap( data ) {
         
         if( parseInt( spreadSheetCell.gs$cell.col ) > stateColumn + 1
                 && parseInt( spreadSheetCell.gs$cell.row ) > dateRow ) {
-            console.log(  spreadSheetCell.gs$cell.row  + " " + dateColMap[ spreadSheetCell.gs$cell.col  ] )
             map[ stateRowMap[ spreadSheetCell.gs$cell.row ] ][ dateColMap[ spreadSheetCell.gs$cell.col  ] ] = {
                 "Cases Registered": spreadSheetCell.gs$cell.inputValue
             }
@@ -115,10 +114,19 @@ function generateStatesMap( data ) {
 
     } );
 
+    let changeDate = new Date( "05/30/2020" );
+    console.log( changeDate );
     Object.keys( map ).forEach( state => {
         if( state != "Testing Centers")
             Object.keys( map[ state ] ).forEach( date => {
-                map[state][date][ "Cases Active" ] = parseInt( map[ state ][ date ][ "Cases Registered" ] ) - parseInt( map[ state ][ date ][ "Cases Recovered" ] ) - parseInt( map[ state ][ date ][ "Cases Fatal" ] );
+                let myDate = new Date( date );
+                if( myDate < changeDate )
+                    map[state][date][ "Cases Active" ] = parseInt( map[ state ][ date ][ "Cases Registered" ] ) - parseInt( map[ state ][ date ][ "Cases Recovered" ] ) - parseInt( map[ state ][ date ][ "Cases Fatal" ] );
+                else {
+                    map[state][date][ "Cases Active" ] = parseInt( map[ state ][ date ][ "Cases Registered" ] );
+                    map[ state ][ date ][ "Cases Registered" ] = parseInt( map[ state ][ date ][ "Cases Registered" ] ) + parseInt( map[ state ][ date ][ "Cases Recovered" ] ) + parseInt( map[ state ][ date ][ "Cases Fatal" ] );
+                }
+
             });
     } );
 
@@ -135,27 +143,27 @@ function fillColor( ) {
         },
         "Level1": {
             class: 'Level1',
-            start: 100
+            start: 500
         },
         "Level2": {
             class: 'Level2',
-            start: 200
+            start: 2000
         },
         "Level3": {
             class: 'Level3',
-            start: 400
+            start: 5000
         },
         "Level4": {
             class: 'Level4',
-            start: 800
+            start: 10000
         },
         "Level5": {
             class: 'Level5',
-            start: 1600
+            start: 25000
         },
         "Level6": {
             class: 'Level6',
-            start: 3400
+            start: 50000
         }
     }
     let today = parseDate( lastDate );
